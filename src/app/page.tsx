@@ -5,11 +5,8 @@ import tBlogPost from "@/type";
  
 
 export default async function HomePage() {
-  // Replace this with your real API endpoint or DB call
-  const res = await fetch("https://mini-blog-backend-10400.vercel.app/api/post", {
-    // `no-store` = always fresh, no cache
-    cache: "no-store",
-  });
+ 
+  const res = await fetch("https://mini-blog-backend-10400.vercel.app/api/post", {cache: "no-store",});
 
   if (!res.ok) {
     throw new Error("Failed to fetch posts");
@@ -25,7 +22,7 @@ export default async function HomePage() {
       {posts?.data.length === 0 ? (
         <p className="text-gray-500">No posts available.</p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {posts?.data?.map((post: tBlogPost) => (
             <PostCard key={post._id} post={post} />
           ))}

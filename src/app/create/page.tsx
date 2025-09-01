@@ -12,7 +12,8 @@ export default function CreatePost() {
     image: "",
     tags: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [imageloading, setImageLoading] = useState(false);
+  const [submitloading, setsubmitLoading] = useState(false);
 
   const IMGBB_API_KEY = "1dee2a8fb008a9e4013e3fcb8506eceb";
 
@@ -32,7 +33,7 @@ export default function CreatePost() {
     formDataImg.append("image", file);
 
     try {
-      setLoading(true);
+      setImageLoading(true);
       const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
         method: "POST",
         body: formDataImg,
@@ -44,7 +45,7 @@ export default function CreatePost() {
     } catch (error) {
       console.error("Image upload failed:", error);
     } finally {
-      setLoading(false);
+      setImageLoading(false);
     }
   };
 
@@ -59,7 +60,7 @@ export default function CreatePost() {
     };
 
     try {
-      setLoading(true);
+      setsubmitLoading(true);
 
       // 🔥 Replace `/api/posts` with your actual backend API endpoint
       const response = await axios.post("https://mini-blog-backend-10400.vercel.app/api/post", newPost);
@@ -83,12 +84,12 @@ export default function CreatePost() {
       }
       alert("Failed to submit post ❌");
     } finally {
-      setLoading(false);
+      setsubmitLoading(false);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-black text-white p-8 rounded-2xl shadow-lg">
+    <div className="  mx-auto mt-10 bg-black text-white  p-8 pt-5 rounded-b-2xl shadow-lg">
       <h1 className="text-3xl font-bold text-indigo-400 mb-6">Create New Post</h1>
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Title */}
@@ -120,7 +121,7 @@ export default function CreatePost() {
         {/* Author */}
         <div>
           <label className="block text-sm mb-1">Author</label>
-          <input
+          <input 
             type="text"
             name="author"
             value={formData.author}
@@ -133,13 +134,13 @@ export default function CreatePost() {
         {/* Image Upload */}
         <div>
           <label className="block text-sm mb-1">Upload Image</label>
-          <input
+          <input required
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
             className="w-full px-2 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none"
           />
-          {loading && <p className="text-indigo-400 mt-2">Uploading...</p>}
+          {imageloading && <p className="text-indigo-400 mt-2">Uploading...</p>}
           {formData.image && (
             <Image
               width={160}
@@ -154,7 +155,7 @@ export default function CreatePost() {
         {/* Tags */}
         <div>
           <label className="block text-sm mb-1">Tags (comma separated)</label>
-          <input
+          <input required
             type="text"
             name="tags"
             value={formData.tags}
@@ -167,10 +168,10 @@ export default function CreatePost() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition font-semibold"
-          disabled={loading}
+          className="w-full py-3 rounded-lg cursor-pointer bg-indigo-600 hover:bg-indigo-500 transition font-semibold"
+          disabled={submitloading || imageloading || !formData.image}
         >
-          {loading ? "Submitting..." : "Submit Post"}
+          {submitloading ? "Submitting..." : "Submit Post"}
         </button>
       </form>
     </div>

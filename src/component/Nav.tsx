@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, PenSquare, Home } from "lucide-react";
+ 
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-black text-white shadow-md sticky top-0 z-50">
+    <nav className="  bg-gray-900 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -20,17 +21,19 @@ export default function Nav() {
           <div className="hidden md:flex space-x-8">
             <Link
               href="/"
-              className="flex items-center gap-1 hover:text-indigo-400 transition"
+              className="flex font-bold items-center gap-1 hover:text-indigo-400 transition"
             >
               <Home size={18} /> Home
             </Link>
             <Link
               href="/create"
-              className="flex items-center gap-1 hover:text-indigo-400 transition"
+              className="flex font-bold items-center gap-1 hover:text-indigo-400 transition"
             >
               <PenSquare size={18} /> Create
             </Link>
           </div>
+
+          {/* <ToggleBtn /> */}
 
           {/* Mobile Hamburger */}
           <button
