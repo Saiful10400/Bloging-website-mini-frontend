@@ -1,16 +1,28 @@
+
 import Image from 'next/image';
 import React from 'react';
+interface PostData {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  image: string;
+  tags: string[];
+}
+ 
 
-const Blog = async ({ params }: { params: { id: string } }) => {
 
+const Blog = async ({params}:{params:Promise<{ id: string }>}) => {
 
-    const res = await fetch("https://mini-blog-backend-10400.vercel.app/api/post?id=" + params.id, { cache: "no-store", });
+ const {id}=await params
+
+    const res = await fetch("https://mini-blog-backend-10400.vercel.app/api/post?id=" +id, { cache: "no-store", });
 
     if (!res.ok) {
         throw new Error("Failed to fetch posts");
     }
 
-    const post = await res.json();
+    const post:{statusCode:number,message:string,data:PostData} = await res.json();
 
 
 
