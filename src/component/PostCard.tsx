@@ -35,7 +35,7 @@ const PostCard = ({ post }: { post: tBlogPost }) => {
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {post.tags?.slice(0,3)?.map((tag: string, i: number) => (
+          {post.tags?.slice(0, 3)?.map((tag: string, i: number) => (
             <span
               key={i}
               className="text-xs bg-indigo-800/50 text-indigo-300 px-2 py-1 rounded-full backdrop-blur-sm"

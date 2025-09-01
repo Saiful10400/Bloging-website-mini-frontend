@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, PenSquare, Home } from "lucide-react";
- 
+import { Menu, X, PenSquare, Home, UploadCloudIcon } from "lucide-react";
+
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,13 @@ export default function Nav() {
               href="/create"
               className="flex font-bold items-center gap-1 hover:text-indigo-400 transition"
             >
-              <PenSquare size={18} /> Create
+              <UploadCloudIcon size={18} /> Create
+            </Link>
+            <Link
+              href="/update"
+              className="flex font-bold items-center gap-1 hover:text-indigo-400 transition"
+            >
+              <PenSquare size={18} /> Update
             </Link>
           </div>
 
